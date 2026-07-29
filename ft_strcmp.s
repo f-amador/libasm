@@ -3,21 +3,19 @@ global ft_strcmp
 section .text
 
 ft_strcmp:
-    jmp .loop
+    xor rcx, rcx                    ; set counter to 0
+    jmp .loop                       ; begin loop
 
 .loop:
-    cmp [rsi], [rdi]
-    jne .done
-    cmp byte [rdi], 0
-    jz .done
-    cmp byte [rsi], 0
-    jz .done
-    inc rdi
-    inc rsi
-    jmp .loop
+    movzx rax, byte [rdi + rcx]     ; save byte from first argument
+    movzx rbx, byte [rsi + rcx]     ; save byte from second argument
+    cmp al, bl                      ; compare bytes
+    jne .done                       ; jump if not equal
+    test al, al                     ; check for null character
+    jz .done                        ; jump if zero
+    inc rcx                         ; increment counter
+    jmp .loop                       ; continues lopp
 
 .done:
-    mov byte rax, [rdi]
-    mov byte rbx, [rsi]
-    sub rax, rbx
+    sub rax, rbx                    ; saves difference in the rax for return
     ret

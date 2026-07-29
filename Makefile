@@ -1,11 +1,11 @@
 NAME = libasm.a
-SRC = ft_strlen.s ft_strcpy.s ft_strcmp.s
+SRC = ft_strlen.s ft_strcpy.s ft_strcmp.s ft_write.s
 OBJ = $(SRC:.s=.o)
-CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CC = gcc
+CFLAGS = -Wall -Wextra -Werror 
 AR = ar -rcs
 NASM = nasm
-NASMFLAGS = -f elf64
+NASMFLAGS = -f elf64 
 RM = rm -f
 
 all: $(NAME)
